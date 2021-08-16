@@ -1,5 +1,22 @@
+using namespace std;
+
 void fahrenheitCentigradeConversion(void) {
-	std::cout << " - fahrenheitCentigradeConversion: not yet implemented\n\n";
+	string inputString;
+
+	while (inputString != "quit")
+	{
+		int temperature;
+
+		cout << "Please enter the starting temperature" << endl;
+		cin >> inputString;
+		temperature = stof(inputString);
+
+		cout << "\nPress C to convert from Fahrenheit to Celcius" << endl;
+		cout << "Press F to convert from Celcius to Fahrenheit" << endl;
+		cin >> inputString;
+
+		cout << temperature;
+	}
 }
 
 
