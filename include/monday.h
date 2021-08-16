@@ -24,7 +24,7 @@ void fahrenheitCentigradeConversion(void)
 		{
 			cout << "\nPlease enter the starting temperature ";
 			cin >> inputString;
-			temperature = stof(inputString); //stof will try to cast to float, but will throw an exception if unable to do
+			temperature = stof(inputString); //stof will try to cast to float, but will throw an exception if unable to do so
 
 			cout << "Press 'C' to convert from Fahrenheit to Celcius" << endl;
 			cout << "Press 'F' to convert from Celcius to Fahrenheit" << endl;
@@ -46,20 +46,32 @@ void fahrenheitCentigradeConversion(void)
 
 void selfServiceCheckout(void) {
   string inputString;
-	float subtotal, itemPrice;
+	float subtotal, total, itemPrice;
   int itemQuantity, itemNo = 1;
   const float shoppingTax = 5.5;
   
   do{
-    cout << "Please enter a quantity for item " itemNo << " (or 0 to finish): ";
+    cout << "\nPlease enter a quantity for item " << itemNo << " (or 0 to finish): ";
     cin >> inputString;
-    itemQuantity = stoi(inputString);
+    itemQuantity = stoi(inputString); //type cast to int from string, will throw exception if unable to do so (this includes floating point values)
+    if (itemQuantity < 1) break;
 
-    cout << "Please enter item " << itemNo << "'s cost:";
-    cin >>inputString;
+    cout << "Please enter item " << itemNo << "'s cost: ";
+    cin >> inputString;
     itemPrice = stof(inputString);
 
-  }while(itemQuantity >= 0)
+    itemNo++;
+    subtotal += (itemPrice * itemQuantity);
+    
+  }while(itemQuantity != 0);
   
+  cout << "Thank you." << endl;
+
+  cout << "\n Subtotal: " << subtotal << endl;
+  cout << "Shopping Tax: " << shoppingTax << endl;
+
+  //calculate total from shopping tax
+  total = subtotal * (shoppingTax / 100);
+  cout << "\n Total: " << total;
 }
 
