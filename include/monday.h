@@ -54,16 +54,17 @@ void selfServiceCheckout(void) {
     cout << "\nPlease enter a quantity for item " << itemNo << " (or 0 to finish): ";
     cin >> inputString;
     itemQuantity = stoi(inputString); //type cast to int from string, will throw exception if unable to do so (this includes floating point values)
-    if (itemQuantity < 1) break;
 
+    if (itemQuantity > 0) {
     cout << "Please enter item " << itemNo << "'s cost: ";
     cin >> inputString;
     itemPrice = stof(inputString);
+    }
 
     itemNo++;
     subtotal += (itemPrice * itemQuantity);
     
-  }while(itemQuantity != 0);
+  }while(itemQuantity > 0);
   
   cout << "Thank you." << endl;
 
