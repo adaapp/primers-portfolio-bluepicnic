@@ -77,7 +77,7 @@ void passwordComplexityChecker(void)
     case 4: 
       passwordStrength = "Very Strong";
       break;
-		default:
+		default: //this should not happen
 			break;
 	}
   cout << "\nThe password '" << inputString << "' is " << passwordStrength << endl;
