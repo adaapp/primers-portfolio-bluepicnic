@@ -56,6 +56,21 @@ details splitString(string textToSplit)
 	return entry;
 }
 
+void findItem(vector<details> items, string itemToFind)
+{
+	for (auto it = items.begin(); it != items.end(); ++it)
+	{
+		if (it->s_name == itemToFind || it->s_no == itemToFind)
+		{
+			cout << "\nContact details:" << endl;
+			cout << it->s_name << ", T: " << it->s_no << endl;
+			return;
+		}
+	}
+	cout << "\nSorry, no contact details found" << endl;
+	return;
+}
+
 
 
 void dataFileParser(void) {
