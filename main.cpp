@@ -3,6 +3,7 @@
 #include <algorithm>//defines a collection of ranged functions; for more info see http://www.cplusplus.com/reference/algorithm/
 #include <random>//defines random number generation facilities; for more info see http://wwww.cplusplus.com/reference/random/
 #include <ctime>//declares a set of functions, macros and types to work with date and time information e.g. the time() function is used to get the current time
+#include <fstream>//defines a library that deals with file reading
 
 //include default source files for daily primer challenges
 #include "include/monday.h"

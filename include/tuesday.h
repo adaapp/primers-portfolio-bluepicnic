@@ -1,5 +1,8 @@
 using namespace std;
 
+int findEmployeeIndex(vector <string> listEmployees, string employeeToFind);
+
+
 void countCharTypes(int &letters, int &numbers, int &specials, string password)
 {
   for (auto it = password.cbegin(); it != password.cend(); ++it)
@@ -31,7 +34,7 @@ int checkPassword(string password)
 
   countCharTypes(letterCount, numCount, specialCount, password); //pass character counts by reference to change original values
 
-  if(numbersFound == string::npos || lettersFound == string::npos) //What if length < 3?
+  if(numbersFound == string::npos || lettersFound == string::npos) //What if length < 3?//check if count of chars is equal to length
   {
     passStrengthScore = 1;
   }
@@ -81,10 +84,42 @@ void passwordComplexityChecker(void)
 }
 
 
-
-
 void employeeListRemoval(void) 
 {
-	string employeeNames [20];
-  
+  string inputString;
+	vector <string> employeeNames = {"John Smith", "Jaelynn Stuart", "Kaley Barajas", "Walter Collier", "Cale Myers"}; //do we want to add to the array?
+  int index = 0;
+
+  do
+  {
+    cout << "\nThere are " << employeeNames.size() << " employees." << endl;
+
+    for (auto it = employeeNames.begin(); it != employeeNames.end(); ++it) //using an iterator for speed and because we're accessing element data directly
+    {
+      cout << *it << endl;
+    }
+
+    cout << "\nEnter an employee name to remove: " << endl;
+    getline(cin, inputString);
+
+    index = findEmployeeIndex(employeeNames, inputString);
+    if (index == -1)
+    {
+      cout << "\nEmployee not found" << endl;
+    }
+    else
+    {
+      employeeNames.erase(employeeNames.begin() + index); //use the begin function to point at the first element, then add according to corresponding element to remove
+    }
+  } while(employeeNames.size() > 0); //cannot remove from empty array, so terminate
+}
+
+int findEmployeeIndex(vector <string> listEmployees, string employeeToFind)
+{
+  for(int i = 0; i < listEmployees.size(); i++) //standard index loop because we need to find the index
+  {
+    if(listEmployees[i] == employeeToFind) {return i;}
+  }
+
+  return -1; //if entered employee name is not found
 }
