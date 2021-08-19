@@ -4,7 +4,7 @@ struct details
 	string s_no;
 };
 
-details splitString(string textToSplit);
+vector<string> splitString(string textToSplit);
 void findItem(vector<details> items, string itemToFind);
 
 
@@ -12,15 +12,20 @@ void phoneDirectory(void)
 {
   string line;
 	vector<details> directory;
+	vector<string> separatedItems;
 	ifstream fileObject;
+	details combinedDetails;
 
 	fileObject.open("phonebook.csv");
 	while (!fileObject.eof())
 	{
 		getline(fileObject, line);
-		directory.push_back(splitDirectoryString(line));
+		separatedItems = splitString(line);
+
+		combinedDetails.s_name = separatedItems[0];
+		combinedDetails.s_no = separatedItems[1];
+		directory.push_back(combinedDetails);
 	}
-	fileObject.close();
 
 	while (line != "quit")
 	{
@@ -44,15 +49,23 @@ void phoneDirectory(void)
 	//get string from user, search xxxx or yyyy based on input
 }
 
-details splitString(string textToSplit)
+vector<string> splitString(string textToSplit)
 {
-	details entry;
+	vector<string> entry;
 	string delimiter = ",";
-
-	entry.s_name = textToSplit.substr(0, textToSplit.find(delimiter));
-	entry.s_no = textToSplit.substr(textToSplit.find(delimiter) + 1, textToSplit.size());
-	cout << entry.s_name << " " << entry.s_no << endl;
-
+	size_t found = textToSplit.find(delimiter); 
+	
+	//for first delimeter do found - found 
+	//then go from delimiter to delimiter as necessary
+	//then once found is npos go from last delimiter (found) to string size
+	entry.push_back(textToSplit.substr(found - found, textToSplit.find(delimiter)));
+	while (found != string::npos)
+	{
+		entry.push_back(textToSplit.substr(found + 1, textToSplit.find(delimiter, found + 1) - found - 1)); //extract from the string, starting at the last recorded delimiter location, every character found before another delimiter 
+		//minus 1 to not include the delimiter itself.
+		found = textToSplit.find(delimiter, found + 1); 
+	}
+	entry.push_back(textToSplit.substr(textToSplit.find(delimiter, found + 1), textToSplit.size())); //find final delimiter 
 	return entry;
 }
 
@@ -71,9 +84,35 @@ void findItem(vector<details> items, string itemToFind)
 	return;
 }
 
-
+struct salaryIndicies
+{
+	string s_initial;
+	string s_surname;
+  string s_salary;
+};
 
 void dataFileParser(void) {
-	std::cout << " - dataFileParser: not yet implemented\n\n";
-  //setw function for string fields 
+	string line;
+	vector<salaryIndicies> listSalaries;
+	vector<string> separatedSalaryInfo;
+	ifstream fileObject;
+	salaryIndicies combinedSalaryInfo;
+
+	fileObject.open("salaryList.csv");
+	while (!fileObject.eof())
+	{
+		getline(fileObject, line);
+		separatedSalaryInfo = splitString(line);
+
+		combinedSalaryInfo.s_initial = separatedSalaryInfo[0].substr(0, 1) + ".";
+		combinedSalaryInfo.s_surname = separatedSalaryInfo[1];
+		combinedSalaryInfo.s_salary = separatedSalaryInfo[2];
+		listSalaries.push_back(combinedSalaryInfo);
+	}
+
+	for (auto it = listSalaries.begin(); it != listSalaries.end(); ++it)
+	{
+		cout << it->s_initial << " " << it->s_surname << " " << it->s_salary << endl;
+	}
+	//setw function for string fields 
 }
