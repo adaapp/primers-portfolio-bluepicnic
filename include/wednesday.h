@@ -21,18 +21,24 @@ void getMaxFieldWidth(int &currentWidth, string field);
 
 
 void phoneDirectory(void) {
-	string line;
+	string line, entry;
 	vector<details> directory;
-	vector<string> separatedItems;
 	ifstream fileObject;
 	details combinedDetails;
 
-	fileObject.open("phonebook.csv");
-	while (!fileObject.eof())
+	//check if file exists
+	ifstream file("phonebook.csv");
+	while (getline(file, line))
 	{
-		getline(fileObject, line);
-		//separatedItems = splitString(line);
-
+		stringstream stream(line);
+		int i = 0;
+		vector<string> separatedItems;
+		while (getline(stream, entry, ','))
+		{
+			removeLeadTrailSpaces(entry);
+			separatedItems.push_back(entry);
+			i++;
+		}
 		if (separatedItems[0][0] != 0 && separatedItems[1][0] != 0)//check that the first character of either separated item is not NULL (ascii code 0) (in the case of a rogue carridge return at the end of the file)
 		{
 			
@@ -50,20 +56,6 @@ void phoneDirectory(void) {
 		cout << "\nSearching " << directory.size() << " records" << endl;
 		findItem(directory, line);
 	}
-
-
-	//open file 
-	//read data -> string line in the format xxxx, yyyyy
-	//close file
-
-	//function - takes a string
-	//split into two separate strings
-	//return both
-
-	//watch for whitespace at start and end
-	//find first instance of a letter or number depending on the string
-
-	//get string from user, search xxxx or yyyy based on input
 
 }
 
@@ -132,7 +124,7 @@ void dataFileParser(void) {
 	}
 	fileObject.close();
 
-	cout << left << std::setw(fieldSizes[initialIndex]) << "Initial" << setw(fieldSizes[surnameIndex] + buffer) << "Last" << setw(fieldSizes[salaryIndex]) << "Salary" << endl;
+	cout << left << setw(fieldSizes[initialIndex]) << "Initial" << setw(fieldSizes[surnameIndex] + buffer) << "Last" << setw(fieldSizes[salaryIndex]) << "Salary" << endl;
 	cout << setw(fieldSizes[initialIndex]) << "--------" << setw(fieldSizes[surnameIndex] + buffer) << "----------" << setw(fieldSizes[salaryIndex]) << "--------" << endl;
 	for (auto it = listSalaries.begin(); it != listSalaries.end(); ++it)
 	{
