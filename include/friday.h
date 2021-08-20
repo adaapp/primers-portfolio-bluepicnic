@@ -129,7 +129,22 @@ void carClass(void) {
 	}
 }
 
+class AreaOf
+{
+  public:
+  int size(int radius) { return PI * (radius * radius); } //Area of a circle
+  int size(int width, int length) { return width * length; } //area of a rectangle
+  int size(int base, int height, int baseTop) { return ((base + baseTop) / bases) * height;} //area of a trapezoid
+
+  private:
+  const float PI = 3.14159;
+  const float bases = 2;
+
+};
 
 void areaOf(void) {
-		std::cout << " - areaOf: not yet implemented\n\n";
+	  AreaOf circle;
+    AreaOf rectangle;
+    AreaOf trapezoid;
+
 }
