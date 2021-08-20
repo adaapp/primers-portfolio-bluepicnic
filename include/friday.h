@@ -80,7 +80,53 @@ void Car::status(void)
 }
 
 void carClass(void) {
-		std::cout << " - carClass: not yet implemented\n\n";
+		string line;
+	int menuSelection = -1;
+	
+	Car sportsCar;
+	sportsCar.set_make("Ford");
+	sportsCar.set_colour("Blue");
+
+	while (menuSelection != 0)
+	{
+		sportsCar.status();
+		cout << "1. Turn Engine On" << endl;
+		cout << "2. Turn Engine Off" << endl;
+		cout << "3. Lock Car" << endl;
+		cout << "4. Unlock Car" << endl;
+		cout << "Please select an option (1-4, or 0 to finish): ";
+
+		getline(cin, line);
+		stringstream input(line);
+		if (input >> menuSelection)
+		{
+			switch (menuSelection)
+			{
+			case 1: //turn engine on
+				sportsCar.engine_on();
+				break;
+			case 2: //turn engine off
+				sportsCar.engine_off();
+				break;
+			case 3: //lock car
+				sportsCar.locked(1);
+				break;
+			case 4: //unlock car
+				sportsCar.locked(0);
+				break;
+			case 0:
+				break;
+			default:
+				cout << "Please enter a valid value" << endl;
+				break;
+			}
+		}
+		else
+		{
+			menuSelection = -1;
+			cout << "Please enter a valid value" << endl;
+		}
+	}
 }
 
 
