@@ -98,7 +98,7 @@ void carClass(void) {
 
 		getline(cin, line);
 		stringstream input(line);
-		if (input >> menuSelection)
+		if (input >> menuSelection && line.find_first_not_of("0123456789") == string::npos) //can the stringstream extract any input and place it into the int variable? & can anything other than a number be found??
 		{
 			switch (menuSelection)
 			{
@@ -132,13 +132,13 @@ void carClass(void) {
 class AreaOf
 {
   public:
-  int size(int radius) { return PI * (radius * radius); } //Area of a circle
-  int size(int width, int length) { return width * length; } //area of a rectangle
-  int size(int base, int height, int baseTop) { return ((base + baseTop) / bases) * height;} //area of a trapezoid
+  float size(float radius) { return PI * (radius * radius); } //Area of a circle
+  float size(float width, float length) { return width * length; } //area of a rectangle
+  float size(float base, float height, float baseTop) { return ((base + baseTop) / bases) * height;} //area of a trapezoid
 
   private:
   const float PI = 3.14159;
-  const float bases = 2;
+  const int bases = 2;
 
 };
 
@@ -147,4 +147,11 @@ void areaOf(void) {
     AreaOf rectangle;
     AreaOf trapezoid;
 
+    float radius = 4.5;
+    float width = 4, length = 5.9;
+    float baseB = 14, height = 7.5, baseA = 6;
+    
+    cout << "Area of Circle (r = " << radius << "): " <<  circle.size(radius) << endl;
+    cout << "Area of Rectangle (w = " << width << ", l = " <<  length << "): " << rectangle.size(width, length) << endl;
+    cout << "Area of Rectangle (b = " << baseB << ", h = " <<  height << ", a = " << baseA << "): " << trapezoid.size(baseB, height, baseA) << endl;
 }
