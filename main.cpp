@@ -6,6 +6,9 @@
 #include <fstream>//defines a library that deals with file reading
 #include <sstream>//allows for stringstream operations
 #include <iomanip>
+#include <chrono> //Defines a library for date and time manipulation and tracking
+#include <thread> //Defines a library that allows for multithreading and concurrent execution
+
 
 //include default source files for daily primer challenges
 #include "include/monday.h"
