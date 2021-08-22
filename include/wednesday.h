@@ -19,10 +19,11 @@ void findItem(vector<details> items, string itemToFind);
 
 /*defintiion of functions for the data file parser*/
 void getMaxFieldWidth(int &currentWidth, string field);
-void saveToFile();
+void displayRecords(int sizes[], vector<salaryIndicies> list);
+void saveToFile(int sizes[], vector<salaryIndicies> list);
 
 /*definition of constant variables for the date file parser*/
-const int initialIndex = 0, surnameIndex = 1, salaryIndex = 2, buffer = 5;
+const int initialIndex = 0, surnameIndex = 1, salaryIndex = 2, buffer = 5; //variables are global to avoid having to pass them as parameters to functions
 
 
 void phoneDirectory(void) {
@@ -102,6 +103,48 @@ void getMaxFieldWidth(int &currentWidth, string field)
 
 }
 
+void saveToFile(int sizes[], vector<salaryIndicies> list)
+{
+  ofstream salaryFile ("salaryList.txt");
+  if (salaryFile.is_open())
+  {
+    //repeated to ensure that file output is identical to that displayed in the console
+    salaryFile << left << setw(sizes[initialIndex]) << "Initial" << setw(sizes[surnameIndex] + buffer) << "Last" << setw(sizes[salaryIndex]) << "Salary" << endl;
+
+	  salaryFile << setw(sizes[initialIndex]) << "--------" << setw(sizes[surnameIndex] + buffer) << "----------" << setw(sizes[salaryIndex]) << "-------" << endl;
+
+    for (auto it = list.begin(); it != list.end(); ++it)
+    {
+      salaryFile << setw(sizes[initialIndex]) << it->s_initial;
+      salaryFile << setw(sizes[surnameIndex] + buffer) << it->s_surname;
+      salaryFile << left << it->s_salary;
+      salaryFile << endl;
+    }
+
+    salaryFile.close();
+  }
+  else cout << "Unable to open file";
+}
+
+void displayRecords(int widths[], vector<salaryIndicies> records)
+{
+  cout << left << setw(widths[initialIndex]) << "Initial" << setw(widths[surnameIndex] + buffer) << "Last" << setw(widths[salaryIndex]) << "Salary" << endl;
+	cout << setw(widths[initialIndex]) << "--------" << setw(widths[surnameIndex] + buffer) << "----------" << setw(widths[salaryIndex]) << "-------" << endl;
+
+  
+	for (auto it = records.begin(); it != records.end(); ++it)
+	{
+    //setw function for string fields 
+		cout << setw(widths[initialIndex]) << it->s_initial;
+
+		cout << setw(widths[surnameIndex] + buffer) << it->s_surname;
+
+		cout << left << it->s_salary;
+
+		cout << endl;
+	}
+}
+
 void dataFileParser(void) {
 	string line, entry;
 	vector<salaryIndicies> listSalaries; //to store each person's data set
@@ -130,19 +173,6 @@ void dataFileParser(void) {
 	}
 	fileObject.close();
 
-	cout << left << setw(fieldSizes[initialIndex]) << "Initial" << setw(fieldSizes[surnameIndex] + buffer) << "Last" << setw(fieldSizes[salaryIndex]) << "Salary" << endl;
-	cout << setw(fieldSizes[initialIndex]) << "--------" << setw(fieldSizes[surnameIndex] + buffer) << "----------" << setw(fieldSizes[salaryIndex]) << "--------" << endl;
-
-  
-	for (auto it = listSalaries.begin(); it != listSalaries.end(); ++it)
-	{
-		cout << setw(fieldSizes[initialIndex]) << it->s_initial;
-
-		cout << setw(fieldSizes[surnameIndex] + buffer) << it->s_surname;
-
-		cout << left << it->s_salary;
-
-		cout << endl;
-	}
-	//setw function for string fields 
+	displayRecords(fieldSizes, listSalaries);
+	saveToFile(fieldSizes, listSalaries);
 }

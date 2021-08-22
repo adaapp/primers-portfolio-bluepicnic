@@ -1,0 +1,11 @@
+Initial     Last            Salary 
+--------    ----------      -------
+N.          Jaylinn         £21500
+A.          Venkata         £29250
+F.          Mara            £30000
+Y.          Shukriyya       £44500
+Z.          Marcel          £31200
+M.          Ela             £45600
+L.          Oliver          £43300
+L.          Jones           £45600
+A.          Smith           £20500
