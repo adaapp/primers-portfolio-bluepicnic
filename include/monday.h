@@ -3,7 +3,7 @@ using namespace std;
 const float shoppingTax = 5.5; // for use with the self-service checkout 
 
 /*Temperature conversion functions*/
-float convertToCelcius(float numToConvert);
+float convertToCelsius(float numToConvert);
 float convertToFahrenheit(float numToConvert);
 float convertToKelvin(float numToConvert, string convertingFrom);
 float convertFromKelvin(float numToConvert, string convertingFrom);
@@ -33,13 +33,13 @@ void fahrenheitCentigradeConversion(void)
       {
         while(validUnit == false)
         {
-          cout << "Press 'C' to convert from Fahrenheit to Celcius" << endl;
-          cout << "Press 'F' to convert from Celcius to Fahrenheit" << endl;
+          cout << "Press 'C' to convert from Fahrenheit to Celsius" << endl;
+          cout << "Press 'F' to convert from Celsius to Fahrenheit" << endl;
           /*Additional input strings included to push for further functionality*/
           cout << "Press 'FK' to convert from Fahrenheit to Kelvin" << endl;
-          cout << "Press 'CK' to convert from Celcius to Kelvin" << endl;
+          cout << "Press 'CK' to convert from Celsius to Kelvin" << endl;
           cout << "Press 'KF' to convert from Kelvin to Fahrenheit" << endl;
-          cout << "Press 'KC' to convert from Kelvin to Celcius" << endl;
+          cout << "Press 'KC' to convert from Kelvin to Celsius" << endl;
           cout << "\nYour Choice: ";
           
           getline(cin, inputString);
@@ -54,7 +54,7 @@ void fahrenheitCentigradeConversion(void)
   } while (inputString != "quit");
 }
 
-float convertToCelcius(float numToConvert)
+float convertToCelsius(float numToConvert)
 {
 	return (numToConvert - 32) * 5 / 9;
 }
@@ -71,7 +71,7 @@ float convertToKelvin(float numToConvert, string convertingFrom)
   {
     return (numToConvert - 32) * 5/9 + 273.15;
   }
-  //convert to Celcius from Fahrenheit, if the input string reflects that
+  //convert to Celsius from Fahrenheit, if the input string reflects that
   else if (convertingFrom[0] == 'c' || convertingFrom[0] == 'C')
   {
     return numToConvert + 273.15;
@@ -86,7 +86,7 @@ float convertFromKelvin(float numToConvert, string convertingTo)
     return (numToConvert - 273.15) * 9/5 + 32;
   }
   
-  //convert from Kelvin to Celcius, if the input string reflects that
+  //convert from Kelvin to Celsius, if the input string reflects that
   else if (convertingTo[1] == 'c' || convertingTo[1] == 'C')
   {
     return numToConvert - 273.15;
@@ -99,7 +99,7 @@ bool checkUnit(float temp, string inputString)
   if (inputString.compare("c") == 0 || inputString.compare("C") == 0) 
   //"compare" string function returns an integer. If 0, the strings match.
   {
-    result = convertToCelcius(temp);
+    result = convertToCelsius(temp);
     cout << temp << " degrees Fahrenheit is " << result << endl;
       return true;
   }
@@ -108,7 +108,7 @@ bool checkUnit(float temp, string inputString)
   else if (inputString.compare("f") == 0 || inputString.compare("F") == 0) 
   { 
     result = convertToFahrenheit(temp);
-    cout << temp << " degrees Celcius is " << result << endl;
+    cout << temp << " degrees Celsius is " << result << endl;
     return true;
   }
 
@@ -120,15 +120,15 @@ bool checkUnit(float temp, string inputString)
     return true;
   }
 
-  //convert Celcius to Kelvin if CK or ck is selected
+  //convert Celsius to Kelvin if CK or ck is selected
   else if (inputString.compare("ck") == 0 || inputString.compare("CK") == 0)
   {
     result = convertToKelvin(temp, inputString);
-    cout << temp << " degrees Celcius is " << result << endl;
+    cout << temp << " degrees Celsius is " << result << endl;
     return true;
   }
 
-  //convert Kelvin to either Celcius or Fahrenheit, depending on input
+  //convert Kelvin to either Celsius or Fahrenheit, depending on input
   else if ((inputString.compare("kf") == 0 || inputString.compare("kf") == 0) ||(inputString.compare("kc") == 0 || inputString.compare("KC") == 0))
   { 
     result = convertFromKelvin(temp, inputString);
@@ -221,15 +221,15 @@ void calculateTotal(float runningTotal)
 }
 
 
-//PUT IN FUNCTION, RETURN BOOL, CHECK AGAINST WHILE LOOP
   bool checkPrice(float &price)
   {
     string input = "";
     getline(cin, input);
     stringstream priceInput(input);
 
-    if (priceInput >> price && input.find_first_not_of("0123456789.") == string::npos)
+    if (input.find_first_not_of("0123456789.") == string::npos)
     {
+      priceInput >> price
       return true;
     }
 

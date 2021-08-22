@@ -1,5 +1,3 @@
-const string POUND = "£";
-
 struct details
 {
 	string s_name;
@@ -119,7 +117,7 @@ void dataFileParser(void) {
 		}
 		combinedSalaryInfo.s_initial = separatedSalaryInfo[initialIndex].substr(0, 1) + ".";
 		combinedSalaryInfo.s_surname = separatedSalaryInfo[surnameIndex];
-		combinedSalaryInfo.s_salary = POUND + separatedSalaryInfo[salaryIndex];
+		combinedSalaryInfo.s_salary = "£" + separatedSalaryInfo[salaryIndex];
 		listSalaries.push_back(combinedSalaryInfo);
 	}
 	fileObject.close();
