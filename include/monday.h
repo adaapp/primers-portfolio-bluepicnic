@@ -76,6 +76,8 @@ float convertToKelvin(float numToConvert, string convertingFrom)
   {
     return numToConvert + 273.15;
   }
+
+  return -1.0;
 }
 
 float convertFromKelvin(float numToConvert, string convertingTo)
@@ -91,6 +93,8 @@ float convertFromKelvin(float numToConvert, string convertingTo)
   {
     return numToConvert - 273.15;
   }
+  
+  return -1.0;
 }
 
 bool checkUnit(float temp, string inputString)
@@ -229,7 +233,7 @@ void calculateTotal(float runningTotal)
 
     if (input.find_first_not_of("0123456789.") == string::npos)
     {
-      priceInput >> price
+      priceInput >> price;
       return true;
     }
 

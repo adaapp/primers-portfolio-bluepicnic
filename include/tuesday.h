@@ -118,27 +118,18 @@ void employeeListRemoval(void)
     }
     else if(inputString != "0")
     {
-      index = findEmployeeIndex(employeeNames, inputString);
-      if (index == -1)
+      vector<string>::iterator it; //define an iterator to search the input string, has direct access to the memory of the object, rather than accessing single elements
+      it = find(employeeNames.begin(), employeeNames.end(), inputString); //search for input
+      if (it == employeeNames.end()) //find function returns the last searched element if the supplied item is not found
       {
         cout << "\nEmployee not found" << endl;
       }
       else
       {
-        employeeNames.erase(employeeNames.begin() + index); //use the begin function to point at the first element, then add according to corresponding element to remove
+        employeeNames.erase(it); //can erase directly using "it" since it has the memory address of the found element stored
       }
     }
   }
-}
-
-int findEmployeeIndex(vector <string> listEmployees, string employeeToFind)
-{
-  for(int i = 0; i < listEmployees.size(); i++) //standard index loop because we need to find the index
-  {
-    if(listEmployees[i] == employeeToFind) {return i;}
-  }
-
-  return -1; //if entered employee name is not found
 }
 
 void addNewEmployee(vector <string> &listEmployees)

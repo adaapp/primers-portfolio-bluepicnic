@@ -1,9 +1,11 @@
+/*Definition of details structure for use in the phone directory primer*/
 struct details
 {
 	string s_name;
 	string s_no;
 };
 
+/*Definition of the salaryIndicies structure for use in the phoneDirectory primer*/
 struct salaryIndicies
 {
 	string s_initial;
@@ -11,11 +13,16 @@ struct salaryIndicies
 	string s_salary;
 };
 
+/*defintiion of functions for the phone directory*/
 void removeLeadTrailSpaces(string &stringToChange);
-void phoneDirectory(void);
 void findItem(vector<details> items, string itemToFind);
-void dataFileParser(void);
+
+/*defintiion of functions for the data file parser*/
 void getMaxFieldWidth(int &currentWidth, string field);
+void saveToFile();
+
+/*definition of constant variables for the date file parser*/
+const int initialIndex = 0, surnameIndex = 1, salaryIndex = 2, buffer = 5;
 
 
 void phoneDirectory(void) {
@@ -60,7 +67,8 @@ void phoneDirectory(void) {
 void findItem(vector<details> items, string itemToFind)
 {
 	int foundCount = 0;
-	//refactor to find more than one
+	//this function will find and display more than one item per the input, if it exists
+  //the find function from <algorithm> will only find the first instance, so unsuitable for this
 	for (auto it = items.begin(); it != items.end(); ++it)
 	{
 		if (it->s_name == itemToFind || it->s_no == itemToFind)
@@ -99,7 +107,7 @@ void dataFileParser(void) {
 	vector<salaryIndicies> listSalaries; //to store each person's data set
 	salaryIndicies combinedSalaryInfo;
 	int fieldSizes[3]{ 8, 0, 0 };
-	const int initialIndex = 0, surnameIndex = 1, salaryIndex = 2, buffer = 5;
+	
 
 	//if(filename == exists)
 	ifstream fileObject("salaryList.csv");
@@ -124,6 +132,8 @@ void dataFileParser(void) {
 
 	cout << left << setw(fieldSizes[initialIndex]) << "Initial" << setw(fieldSizes[surnameIndex] + buffer) << "Last" << setw(fieldSizes[salaryIndex]) << "Salary" << endl;
 	cout << setw(fieldSizes[initialIndex]) << "--------" << setw(fieldSizes[surnameIndex] + buffer) << "----------" << setw(fieldSizes[salaryIndex]) << "--------" << endl;
+
+  
 	for (auto it = listSalaries.begin(); it != listSalaries.end(); ++it)
 	{
 		cout << setw(fieldSizes[initialIndex]) << it->s_initial;

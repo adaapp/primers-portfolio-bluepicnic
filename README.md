@@ -56,7 +56,62 @@ For this primer’s additional functionality, I included the option to remove th
 
 I also refactored my code at this stage to separate calculating the total and checking if the input for price entry is valid from the main function into their own respective functions. The validity of a price input is tracked using the validPrice Boolean which assigned a value from the checkPrice function.  
 
-### Primer 3 -
+### Primer 3 – Password Complexity Checker
+The third primer takes a user input and returns an output evaluating the strength of the input string as a password, according to specified criteria. These are :
+* A password is weak if it only has solely either numeric or alphabetic characters 
+* A password is moderate if it has at least 4 characters and does not meet the criteria of the other strength classifications
+* A password is Strong if it has 8 or more characters, at least two of which must be numeric and 4 or more of which must be alphabetic
+* A password is Very Strong if it meets the criteria of a strong password, with at least one special character also included.
+
+It was also specified that the password evaluation itself must take place in a separate function and returns a score from 1-4 to represent each of the password strength classifications in ascending order. 
+
+Each of the password strength criteria provided a good starting point for dissecting the problem, as four key conditions were already outlined in the brief and a number of different tasks became apparent the more each condition was evaluated. I broke the program down as such:
+* Capture user input
+* Create a function to check against the criteria and calculate a strength score
+* Create a function to count each type of character in the string (one for each of letters, numbers and special characters)
+* Assign the returned strength score to an output that reflects the strength of the password
+
+#### Reflection (as well as issues, challenges & resolutions)
+Since many of the conditions were already laid out in the brief for this primer, and since we did not need to specifically validate user input and could just take the string at face value, I had less issues with this task than others. 
+
+Where this task proved challenging was meeting the criteria of the “Weak” and “Moderate” password strengths. As I mentioned above, a function needed to be created to count each type of character in the user-supplied password string. This was used for the “Weak” password strength conditions.
+
+This meant storing 3 separate values to track each type, and using the created function to loop through the string with an iterator to check against each character to see if they fall within a range of ASCII character codes. An iterator was used as it’s a more direct method that can make use of string class member functions to accurately loop through each character index of a string, without having to track integer index variable, and the ASCII codes were used as they provide ranges between multiple values that correspond to each character type, opposed to checking against each letter, number or special character individually.
+
+For the “Moderate” strength, since it acts as a “default” case of sorts, it needed to be placed at the end of the control logic flow, which was a realisation made after testing the program extensively.
+
+This primer’s additional functionality includes a default case when assigning password strengths after returning the score from the function, before displaying the evaluation string. Because of the tightly constructed cases for the other password strengths, this case can only occur if the password length is less than 3 characters. A corresponding input string is also added in this case to encourage the user to input a character with more than 3 characters. In addition, the “Weak” password type will also be assigned to passwords that include only special characters, similar to that of the existing cases for both numbers and letters. 
+
+### Primer 4 – Employee List Removal
+The fourth primer’s initial design was to display a pre-defined array of employees and take a user input. If the input matched one of the names in the array, that name is removed. 
+
+The only input handling required for this primer is to check if the name supplied by the user input exists, and to display an error message if not.
+
+There was also a second output string that displayed the current number of people in the list.
+
+I broke down this problem in the following way:
+* Populate name array
+* Display number of employees
+* Display employee list
+* Capture user input
+* Create a function that searches for the user supplied name
+  *  remove if found
+  * display “Employee not found” if not
+
+#### Reflection (as well as issues, challenges & resolutions)
+For this primer, I had significant difficulty using arrays to create an effective and simple solution. Arrays in C++ are immutable in size and require that size to be defined on creation. 
+
+For the sake of this task, especially with the pre-defined data to include, arrays, as a data structure, would have been sufficient. However, in order to support the functionality required for this primer, I would have had to create a number of additional functions and kept track of the array size manually, which can be cumbersome,in addition to the flow above. 
+
+In order to continue to create with simplicity in mind, to conserve system resources and to support my additional functionality for this task, I instead opted to use a vector as my data structure. This is because of several factors: 
+* its size is variable 
+* elements can be fully removed, not just changed or hidden, and the vector will change sizes accordingly
+* there are a number of member functions and extended classes (such as iterators) part of the vector class that are well suited to this task
+
+Because vectors have access to such a useful suite of functionality, especially when compared to arrays, I also made use of the “find” function from the algorithm library in tandem with the "erase" function built into the vector object to search for and erase a found employee. This is a significantly more optimised and simple solution to the problems posed by the primer, compared to a solution that using solely arrays would have required. 
+
+My additional functionality for this primer was the inclusion of an addNewEmployee function that, if the user inputs “+1”, prompts them to enter a name that is added to the vector. This function also adds additional input validation, ensuring that a string equal to “+1” cannot be added, since inputting that specific string as part of the initial design’s removal prompt will instead call the addNewEmployee function, effectively adding an element that cannot be deleted.
+
 ..  
 ..  
 
