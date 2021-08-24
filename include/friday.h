@@ -130,7 +130,7 @@ void Car::locked(bool isLocked)
 void Car::status(void) 
 { 
 	string lockedStatus = (mLocked == 0) ? "Unlocked" : "Locked"; //interchangeable string that represents the locked/unlocked state of the car. If the class variable is 0 the string will equal Unlocked, otherwise, it will equal locked
-	cout << "\nCar Status: " << "colour: " << mColour << ", make: " << mMake << ", engine: " << mEngine << ", " << lockedStatus << endl;
+	cout << "\nCar Status: " << "colour: " << get_colour() << ", make: " << get_make() << ", engine: " << mEngine << ", " << lockedStatus << endl;
 }
 
 /*---------------------END OF CAR CLASS FUNCTION IMPLEMENATIONS----------------------*/

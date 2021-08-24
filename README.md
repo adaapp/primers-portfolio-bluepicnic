@@ -157,7 +157,8 @@ Then:
   *  Suitably formats each column used for the output string 
   * Suitably formats each member variable element from the salaryIndicies structure for the output string
 
-#### Reflection (as well as issues, challenges & resolutions)
+**Reflection (as well as issues, challenges & resolutions)**
+
 The challenges and issues I faced while developing this primer were all concerning formatting the output strings. Prior to the development of my removeLeadTrailSpaces function, which was used to assist with parsing the input strings for both primers, I had difficulty in getting the output strings to line up correctly if any leading or trailing spaces were present. Even with this problem resolved, thanks to the function, I still had issues getting the output string to line up correctly. 
 
 Thankfully, after doing some research, I found the utilities of “setw” from the iomanip library and “left” from the iostream library especially useful for this purpose. However, I found that these member functions still required a significant learning curve in order to utilise them correctly. Once I’d overcome this hurdle, I refactored my code and placed any output operations into their own function, which I called from the main program. This was done to improve the readability of my code. 
@@ -165,6 +166,69 @@ Thankfully, after doing some research, I found the utilities of “setw” from 
 I also continued to use the getline function’s overload with stringstream and delimiter parameters to separate values and store them in the salaryIndicies objects and subsequent vectors designated to store that defined type. 
 
 The additional piece of functionality I added for this primer was the creation of a function that writes the formatted data to an output file, salaryList.txt. This contains the same output that is seen in the console. This needed to be formatted in the same way as the output string, and was also placed in its own function. Because these are two separate output streams (cout and the output file) and the data is identically formatted, much of the code is required to be similar for both of these functions.
+
+### Primer 7 – Sleep timer
+The 7th primer is designed to demonstrate an understanding of multithreading features and the functionality of the “thread” library. 
+
+In particular, this primer focuses on the sleep_for function, which pauses execution of the program for a provided amount of time. The initial design was to capture user input for the amount of time that should be passed into the sleep_for function. If no valid input is provided, then the program will pause execution for a default 10 seconds. No output was expected for this task.
+
+This problem did not require a significant amount of consideration or deconstruction, but was broken down as follows:
+* Capture user input
+* Check if user input is valid, or if there is any input at all
+  * if yes, store the user’s input as the duration to use
+  * if no, default to 10 seconds
+* pause execution of the program for the amount of seconds specified
+
+**Reflection (as well as issues, challenges & resolutions)**
+
+Being a considerably smaller task compared to that of the other primers, I did not encounter any particular issues. The only aspect of this task that I had to contemplate was any input validation for the task itself. Since no output was expected, I was unsure whether to include an error message if any user input was invalid and whether or not to have the user be required to input again on a failed attempt. 
+
+In the end, after refactoring my code, I opted to have the program default to 10 seconds for the sleep_for duration if invalid input, or a blank string is entered. 
+
+I made use of the “chrono” library in order to provide a steady and accurate parameter for the this_thread::sleep_for function to use. The chrono library has member functions that can accurately represent a wide variety of time durations, ranging from nanoseconds to years. I felt this was a suitable inclusion due to the need to pause for a measurable amount of time. 
+
+### Primer 8 – Joining and Detaching Threads
+
+Primer 8 expands on concepts introduced in Primer 7, and was split into two parts. The initial design uses two global variables representing two durations that two different instances of the this_thread::sleep_for member function takes as parameters to pause execution for. These different instances were contained within their own functions to demonstrate multithreading functionality. 
+Both of these functions were then defined as thread objects and relevant output within the functions tracks when each of these threads (including the thread in the main function for this primer) start and end. 
+
+The two separate threads were then “joined” to the main thread, which prevents the main thread from executing fully until both joined threads terminated or completed.
+
+The second part of this primer focussed on detaching threads, which necessitated the creation of a second function to act as another main thread. Two further threads were created, initialised using the same functions mentioned above and then were immediately detached, and executed them independently, which prevented them from blocking or synchronising with the main thread. The main thread then completes, releasing its resources and the two other threads completed independently. 
+
+I broke down this problem like so:
+PART A:
+* Place output strings at the start and end of the main function
+* Create first timer function
+* Create second timer function
+* Create thread objects for both functions
+* Check if threads are joinable 
+  * if so, join thread
+
+PART B:
+*Place output strings at the start and end of the new function
+*Create thread object for first timer function
+*Detach first thread object
+*Create second thread object for second timer function
+*Detach second thread object
+
+**Reflection (as well as issues, challenges & resolutions)**
+
+Similar to primer 7, the 8th primer I found was simple to execute, but took slightly longer to understand than others. It was not initially clear to me what the order of execution was for each of the thread object functions, especially when detaching threads for part B of the primer. 
+
+The source of a considerable amount of confusion came when the two detached threads not only continued to output to the console after the main thread has terminated, but also seemingly executed out of order. An example of this can be seen below. 
+
+![output from main thread](09491bc274b660d7836e0115ca0728b2.png)
+ ![output detached threads, appearing after main thread has finished executing](4980a9a37c464eaa9ee9014d43b1b76a.png)
+
+
+
+My expectation for the behaviour of the detached threads differed to what actually occurred. I misunderstood what was meant by detached thread’s executions becoming independent of one another, and the behaviour of the threads continuing to execute without blocking one another. As such, the inclusion of the additional output led me to believe I had approached the task in the wrong way, since only the output from the main thread was required. 
+
+This happens due to the fact that the console output won’t always reflect the state of the program’s order of execution because of a delay in transmitting output from the program itself to an output stream, such as the console.
+
+Instead, since the execution of the detached threads were essentially asynchronous (aside from the use of the sleep_now function) by executing without reliance on or waiting for one another, there was in fact no reliable way to model or anticipate an expected output. Once I had overcome this obstacle, I refactored my code to give it an extra level of readability.
+
 
 ..  
 ..  

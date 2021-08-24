@@ -40,12 +40,12 @@ void phoneDirectory(void) {
   if(isFile == true)
   {
     ifstream file(fileName);
-    while (getline(file, line))
+    while (getline(file, line)) //while we can get lines of text from the file
     {
       stringstream stream(line);
       int i = 0;
       vector<string> separatedItems;
-      while (getline(stream, entry, ','))
+      while (getline(stream, entry, ',')) //
       {
         removeLeadTrailSpaces(entry);
         separatedItems.push_back(entry);
