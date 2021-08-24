@@ -65,8 +65,12 @@ void phoneDirectory(void) {
     {
       cout << "Please enter a name or number to search (or type 'quit'): ";
       getline(cin, line);
-      cout << "\nSearching " << directory.size() << " records" << endl;
-      findItem(directory, line);
+      if(line != "quit")
+      {
+        cout << "\nSearching " << directory.size() << " records" << endl;
+        findItem(directory, line);
+      }
+      
     }
   }
 

@@ -38,7 +38,7 @@ int checkPassword(string password)
 
   countCharTypes(letterCount, numCount, specialCount, password); //pass character counts by reference to change original values
 
-  if(password.size() == letterCount || password.size() == numCount || password.size() == specialCount) //check if count of characters OF EACH TYPE is equal to length of password
+  if((password.size() == letterCount || password.size() == numCount || password.size() == specialCount) && password.size() != 0) //check if count of characters OF EACH TYPE is equal to length of password
   {
     passStrengthScore = 1; //weak password
   }
@@ -81,7 +81,7 @@ void passwordComplexityChecker(void)
     case 4: 
       passwordStrength = "Very Strong";
       break;
-		default: //this should only happen if password length is less than 3, otherwise it will be a Moderate password
+		default: //this should only happen if password length is less than 3 and all characters are not of the same type, otherwise it will be a Moderate password
       passwordStrength = "Too Short";
 			break;
 	}

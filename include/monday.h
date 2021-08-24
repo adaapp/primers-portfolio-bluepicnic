@@ -162,9 +162,8 @@ void selfServiceCheckout(void) {
 		getline(cin, inputString);
 		stringstream quantityInput(inputString); //use stringstream to safely pass a string into the item quantity variable
 
-		if (inputString.find_first_not_of("0123456789.-") == string::npos)
+		if (quantityInput >> itemQuantity && inputString.find_first_not_of("0123456789.-") == string::npos)
 		{
-      quantityInput >> itemQuantity;
 			if (itemQuantity > 0) 
 			{
         while (validPrice == false)
@@ -231,15 +230,15 @@ void calculateTotal(float runningTotal)
     getline(cin, input);
     stringstream priceInput(input);
 
-    if (input.find_first_not_of("0123456789.") == string::npos)
+    if (priceInput >> price && input.find_first_not_of("0123456789.") == string::npos)
     {
-      priceInput >> price;
+      
       return true;
     }
 
     else
     {
-      cout << "\nPlease enter a valid price" << endl;
+      cout << "Please enter a valid price" << endl;
       return false;
     }
   }
