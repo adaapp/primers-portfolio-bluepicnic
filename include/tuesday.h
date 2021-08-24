@@ -8,7 +8,44 @@ void countCharTypes(int &letters, int &numbers, int &specials, string password);
 int findEmployeeIndex(vector <string> listEmployees, string employeeToFind);
 void addNewEmployee(vector<string> &listEmployees);
 
+/*-------------------------------------------------------------------------------*/
 
+void passwordComplexityChecker(void) 
+{
+	string inputString, passwordStrength;
+  
+  getline(cin, inputString); //get the whole line, including spaces
+  
+  int score = checkPassword(inputString);
+  
+  //Don't return string values from function, assign values from returned int
+  switch (score)
+  {
+    case 1:
+      passwordStrength = "Weak";
+      break;
+    case 2:
+      passwordStrength = "Moderate";
+      break;
+    case 3:
+      passwordStrength = "Strong";
+      break;
+    case 4: 
+      passwordStrength = "Very Strong";
+      break;
+		default: //this should only happen if password length is less than 3 and all characters are not of the same type, otherwise it will be a Moderate password
+      passwordStrength = "Too Short";
+			break;
+	}
+  cout << "\nThe password '" << inputString << "' is " << passwordStrength << endl;
+
+  if (passwordStrength == "Too Short") 
+  {
+    cout << "Please input a password with more than 3 characters" << endl;
+  }
+}
+
+/*Function implementations for the password complexity checker*/
 
 void countCharTypes(int &letters, int &numbers, int &specials, string password)
 {
@@ -58,41 +95,6 @@ int checkPassword(string password)
   return passStrengthScore;
 }
 
-void passwordComplexityChecker(void) 
-{
-	string inputString, passwordStrength;
-  
-  getline(cin, inputString); //get the whole line, including spaces
-  
-  int score = checkPassword(inputString);
-  
-  //Don't return string values from function, assign values from returned int
-  switch (score)
-  {
-    case 1:
-      passwordStrength = "Weak";
-      break;
-    case 2:
-      passwordStrength = "Moderate";
-      break;
-    case 3:
-      passwordStrength = "Strong";
-      break;
-    case 4: 
-      passwordStrength = "Very Strong";
-      break;
-		default: //this should only happen if password length is less than 3 and all characters are not of the same type, otherwise it will be a Moderate password
-      passwordStrength = "Too Short";
-			break;
-	}
-  cout << "\nThe password '" << inputString << "' is " << passwordStrength << endl;
-
-  if (passwordStrength == "Too Short") 
-  {
-    cout << "Please input a password with more than 3 characters" << endl;
-  }
-}
-
 
 void employeeListRemoval(void) 
 {
@@ -131,6 +133,8 @@ void employeeListRemoval(void)
     }
   }
 }
+
+/*Function implementation for employee list*/
 
 void addNewEmployee(vector <string> &listEmployees)
 {

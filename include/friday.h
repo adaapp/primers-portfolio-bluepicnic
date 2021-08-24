@@ -151,6 +151,7 @@ void AreaOf::displaySize(float baseB, float height, float baseA)
   cout << "Area of Rectangle (b = " << baseB << ", h = " <<  height << ", a = " << baseA << "): " << mArea << endl;
 }
 
+/*------------------END OF AREAOF CLASS FUNCTION IMPLEMENATIONS--------------------*/
 
 void carClass(void) 
 {
