@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <chrono> //Defines a library for date and time manipulation and tracking
 #include <thread> //Defines a library that allows for multithreading and concurrent execution
+#include <sys/stat.h>
 
 
 //include default source files for daily primer challenges

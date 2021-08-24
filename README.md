@@ -15,7 +15,8 @@ After review and careful consideration, the challenge itself could be broken dow
 * Create a method to convert F->C
 * Create a method to convert C->F
  
-#### Reflection (as well as issues, challenges & resolutions)
+**Reflection (as well as issues, challenges & resolutions)**
+
 On a surface level, the implementation of the initial design was not particularly difficult. However, I found the biggest challenge of this primer to be designing and implementing a robust enough input handling system to deal with the back-to-back user inputs. During experimentation with various input handling methods, I found that there were wider issues with my design that needed to be refactored. 
 
 For example, there were issues with my control flow structures such as specific loops and conditional statements, that appeared unintentionally as the result of bad input, which either caused incorrect output to appear, or would not take input upon looping back around. Sometimes, due the conditions set for these loops and statements, some output would not appear at all. This required me to refactor the conditions for some of my loops to ensure they were working correctly.  
@@ -48,7 +49,8 @@ Then:
 * Calculate tax
 * Combine subtotal and tax to get total price for transaction
 
-#### Reflection (as well as issues, challenges & resolutions)
+**Reflection (as well as issues, challenges & resolutions)**
+
 For the initial design, the greatest challenge I faced was ensuring that the output strings displayed to the user would appear in the right order and with the correct spacing. This also challenged me when I came back to refactor my program to include extra functionality and input validation, as extra error messages needed to be displayed alongside existing text. 
 Input validation also proved a challenge for this primer as I struggled to identify issues with my control flow structures when attempting to re-capture input from the user after rejecting their input and displaying an error message. 
 
@@ -71,7 +73,8 @@ Each of the password strength criteria provided a good starting point for dissec
 * Create a function to count each type of character in the string (one for each of letters, numbers and special characters)
 * Assign the returned strength score to an output that reflects the strength of the password
 
-#### Reflection (as well as issues, challenges & resolutions)
+**Reflection (as well as issues, challenges & resolutions)**
+
 Since many of the conditions were already laid out in the brief for this primer, and since we did not need to specifically validate user input and could just take the string at face value, I had less issues with this task than others. 
 
 Where this task proved challenging was meeting the criteria of the “Weak” and “Moderate” password strengths. As I mentioned above, a function needed to be created to count each type of character in the user-supplied password string. This was used for the “Weak” password strength conditions.
@@ -98,7 +101,8 @@ I broke down this problem in the following way:
   *  remove if found
   * display “Employee not found” if not
 
-#### Reflection (as well as issues, challenges & resolutions)
+**Reflection (as well as issues, challenges & resolutions)**
+
 For this primer, I had significant difficulty using arrays to create an effective and simple solution. Arrays in C++ are immutable in size and require that size to be defined on creation. 
 
 For the sake of this task, especially with the pre-defined data to include, arrays, as a data structure, would have been sufficient. However, in order to support the functionality required for this primer, I would have had to create a number of additional functions and kept track of the array size manually, which can be cumbersome,in addition to the flow above. 
@@ -111,6 +115,56 @@ In order to continue to create with simplicity in mind, to conserve system resou
 Because vectors have access to such a useful suite of functionality, especially when compared to arrays, I also made use of the “find” function from the algorithm library in tandem with the "erase" function built into the vector object to search for and erase a found employee. This is a significantly more optimised and simple solution to the problems posed by the primer, compared to a solution that using solely arrays would have required. 
 
 My additional functionality for this primer was the inclusion of an addNewEmployee function that, if the user inputs “+1”, prompts them to enter a name that is added to the vector. This function also adds additional input validation, ensuring that a string equal to “+1” cannot be added, since inputting that specific string as part of the initial design’s removal prompt will instead call the addNewEmployee function, effectively adding an element that cannot be deleted.
+
+### Primer 5 – Phone Directory
+The 5th Primer reads data from a file to be stored in the program. Each entry has two associated pieces of data, a name and telephone number. The initial design of the program is to capture user input to search for the entries and output both pieces of data if found, and an error message if not.
+
+I broke down the program thusly into the following tasks:
+* Read data from file
+* Separate data entry from single string into two 
+* Store in data structure 
+* Capture user input
+* Create function to search for data entry based on user input
+
+**Reflection (as well as issues, challenges & resolutions)**
+
+For this primer, I initially had trouble finding a reliable way of splitting the single string taken from the input file into two. The format of the file was CSV, so each name and telephone number pair were separated by a comma. I spent a significant amount of time developing a solution to split each line of text from the file at the comma delimiter, even delegating the task to its own function. This function would have been used for both primer 5 and primer 6, but in the end, I opted to use the getline function’s compatibility with the stringstream type to loop through each line from the file and separate the each time a specified delimiter, in this case a comma, was found. This was in the interests of simplicity and conserving system resources. 
+
+Because the functionality of this primer requires searching for specific strings (or slight variations thereof, such as capitalised letters), I included the removeLeadTrailSpaces function to remove any instances of whitespace (including tabs, carriage returns, etc) from the beginning or end of a string read from the input file. This was implemented to aid the search functionality, as users would likely not be aware of any leading or trailing whitespace at the beginning of the string. Any spaces within the string itself before the last character remain unaffected. 
+
+I once again used vectors as my chosen data structure, as we cannot be sure of the amount of data that comes from a given file. Instead of opting for 2-dimensional arrays to store the data from the file, I defined a structure to group both pieces of data under a single type: details. My vector was then made up of elements of the details type and I updated and accessed each variable in the structure individually, but was able to pass both elements as one variable. This was chosen for readability, and ease of use. 
+
+I also included a check when opening the input file to extract data to ensure that the file requested exists in the active directory.
+
+### Primer 6 – Data file parser
+The objective of the initial design of this primer was to once again read data from a file, this time parsing and formatting the data for suitable output strings. Each of the three comma separated values needed to be formatted differently and displayed in “columns” of equal size, based on the longest item for that set of inputs.  
+
+Similar to the task above, I needed to select appropriate data structures to store the incoming information from the input file, and once again opted to use vectors for their variable size and structures to store multiple variables under a single type object. This structure was named salaryIndicies.
+
+I also broke the challenge down into the following tasks:
+* Read data from file
+
+While each line from the file is being read:
+
+* Create a function that calculates the max field width based on input sizes.
+* Remove any trailing or leading spaces
+* Push each element separated by a comma to a string vector
+* Initialise a salaryIndicies object with the data from the string and push to the back of the main vector
+
+Then:
+
+* Create a function that:
+  *  Suitably formats each column used for the output string 
+  * Suitably formats each member variable element from the salaryIndicies structure for the output string
+
+#### Reflection (as well as issues, challenges & resolutions)
+The challenges and issues I faced while developing this primer were all concerning formatting the output strings. Prior to the development of my removeLeadTrailSpaces function, which was used to assist with parsing the input strings for both primers, I had difficulty in getting the output strings to line up correctly if any leading or trailing spaces were present. Even with this problem resolved, thanks to the function, I still had issues getting the output string to line up correctly. 
+
+Thankfully, after doing some research, I found the utilities of “setw” from the iomanip library and “left” from the iostream library especially useful for this purpose. However, I found that these member functions still required a significant learning curve in order to utilise them correctly. Once I’d overcome this hurdle, I refactored my code and placed any output operations into their own function, which I called from the main program. This was done to improve the readability of my code. 
+
+I also continued to use the getline function’s overload with stringstream and delimiter parameters to separate values and store them in the salaryIndicies objects and subsequent vectors designated to store that defined type. 
+
+The additional piece of functionality I added for this primer was the creation of a function that writes the formatted data to an output file, salaryList.txt. This contains the same output that is seen in the console. This needed to be formatted in the same way as the output string, and was also placed in its own function. Because these are two separate output streams (cout and the output file) and the data is identically formatted, much of the code is required to be similar for both of these functions.
 
 ..  
 ..  

@@ -1,11 +1,13 @@
+/*Definition of the Car class*/
 class Car
 {
 public:
+  /*Definition of Car class member functions*/
 	Car();
 	~Car();
 	void set_colour(string colourToSet) { mColour = colourToSet; }
-	string get_colour(void) { return mColour; }
-	void set_make(string makeToSet) { mMake = makeToSet; }
+	string get_colour(void) { return mColour; } //car colour could be anything from an obscure name of a colour to its value in hexidecimal, so no input validation required on the string
+	void set_make(string makeToSet) { mMake = makeToSet; } //Car make could also be anything, so no input validation required here either
 	string get_make(void) { return mMake; }
 	void engine_on(void);
 	void engine_off(void);
@@ -20,6 +22,7 @@ private:
 
 };
 
+/*Car class member function implementation*/
 Car::Car()
 {
 	mColour = " ";
@@ -60,14 +63,14 @@ void Car::engine_off(void)
 
 void Car::locked(bool isLocked)
 {
-	string lockedStatus = (mLocked == 0) ? "Unlocked" : "Locked";
+	string lockedStatus = (mLocked == 0) ? "Unlocked" : "Locked"; //interchangeable string that represents the locked/unlocked state of the car. If the class variable is 0 the string will equal Unlocked, otherwise, it will equal locked
 	if (mLocked == isLocked)
 	{
 		cout << "Sorry, the car is already " << lockedStatus << endl;
 	}
 	else
 	{
-		mLocked = isLocked;
+		mLocked = isLocked; //change value based on value passed into function
 		lockedStatus = (mLocked == 0) ? "Unlocking the car" : "Locking the car";
 		cout << lockedStatus << endl;
 	}
@@ -79,8 +82,12 @@ void Car::status(void)
 	cout << "\nCar Status: " << "colour: " << mColour << ", make: " << mMake << ", engine: " << mEngine << ", " << lockedStatus << endl;
 }
 
-void carClass(void) {
-		string line;
+/*Non-Class member functions for primer 9 */
+void displayMenu();
+void menuChoice(int choice, Car &vehicle);
+
+void carClass(void) 
+{
 	int menuSelection = -1;
 	
 	Car sportsCar;
@@ -89,44 +96,70 @@ void carClass(void) {
 
 	while (menuSelection != 0)
 	{
+    string line; //string for getline function to use
+    
 		sportsCar.status();
-		cout << "1. Turn Engine On" << endl;
-		cout << "2. Turn Engine Off" << endl;
-		cout << "3. Lock Car" << endl;
-		cout << "4. Unlock Car" << endl;
-		cout << "Please select an option (1-4, or 0 to finish): ";
+		displayMenu();
 
-		getline(cin, line);
-		stringstream input(line);
-		if (input >> menuSelection && line.find_first_not_of("0123456789") == string::npos) //can the stringstream extract any input and place it into the int variable? & can anything other than a number be found??
+		getline(cin, line); //get input
+		if (line.find_first_not_of("0123456789") == string::npos) //can anything other than a number be found??
 		{
-			switch (menuSelection)
-			{
-			case 1: //turn engine on
-				sportsCar.engine_on();
-				break;
-			case 2: //turn engine off
-				sportsCar.engine_off();
-				break;
-			case 3: //lock car
-				sportsCar.locked(1);
-				break;
-			case 4: //unlock car
-				sportsCar.locked(0);
-				break;
-			case 0:
-				break;
-			default:
-				cout << "Please enter a valid value" << endl;
-				break;
-			}
+      stringstream input(line);
+      input >> menuSelection;
+			menuChoice(menuSelection, sportsCar);
 		}
 		else
 		{
-			menuSelection = -1;
+			menuSelection = -1; //make sure program does not quit, since setting this variable to 0 would quite the program
 			cout << "Please enter a valid value" << endl;
 		}
 	}
+}
+
+void displayMenu()
+{
+  cout << "1. Turn Engine On" << endl;
+  cout << "2. Turn Engine Off" << endl;
+  cout << "3. Lock Car" << endl;
+  cout << "4. Unlock Car" << endl;
+  cout << "5. Set Car Colour" << endl;
+  cout << "6. Set Car Make" << endl;
+  cout << "Please select an option (1-6, or 0 to finish): ";
+}
+
+void menuChoice(int choice, Car &vehicle)
+{
+  string inputLine;
+  switch (choice)
+  {
+    case 1: //turn engine on
+      vehicle.engine_on();
+      break;
+    case 2: //turn engine off
+      vehicle.engine_off();
+      break;
+    case 3: //lock car
+      vehicle.locked(1);
+      break;
+    case 4: //unlock car
+      vehicle.locked(0);
+      break;
+    case 5: //set colour
+      cout << "\nPlease enter a new car colour" << endl;
+      getline(cin, inputLine);
+      vehicle.set_colour(inputLine);
+      break;
+    case 6: //set make
+      cout << "\nPlease enter a new car make" << endl;
+      getline(cin, inputLine);
+      vehicle.set_make(inputLine);
+      break;
+    case 0:
+      break;
+    default:
+      cout << "Please enter a valid value" << endl;
+      break;
+  }
 }
 
 class AreaOf

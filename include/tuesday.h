@@ -141,11 +141,11 @@ void addNewEmployee(vector <string> &listEmployees)
       cout << "\nPlease enter a name to add" << endl;
       getline(cin, newEmployee);
 
-      if(newEmployee == "+1") //While not an employee name, we don't want the user to enter an entry they cannot remove, since +1 is reserved for this scenario where employees are added
+      if(newEmployee == "+1" || newEmployee.find_first_not_of(" \t\v\r\n") == string::npos) //We don't want the user to enter a name they cannot remove, and +1 is reserved for this scenario where employees are added
       {
-        cout << "\nThat name is not valid, please enter a valid name" << endl;
+        cout << "That name is not valid, please enter a valid name" << endl;
       }
-  } while(newEmployee == "+1");
+  } while(newEmployee == "+1" || newEmployee.find_first_not_of(" \t\v\r\n") == string::npos);
   listEmployees.push_back(newEmployee);
   
 }

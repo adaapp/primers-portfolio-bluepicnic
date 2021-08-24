@@ -1,5 +1,13 @@
 {
   "files": {
+    "include/friday.h": [
+      {
+        "id": "3b5c4cc3-3c45-46ba-aede-6a3f7450bda2",
+        "line": 4,
+        "version": 2193,
+        "index": 44
+      }
+    ],
     "include/monday.h": [
       {
         "id": "3aa99655-8bd4-4645-9cdd-c6241b664629",
