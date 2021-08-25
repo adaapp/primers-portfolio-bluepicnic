@@ -1,6 +1,4 @@
 # Primer Portfolio
-# a description and review of the problem and outline of your general approach and any main issues
-identified within
 ## Section 1 - Primer Challenges
 ### Primer 1 - Fahrenheit / Centigrade Conversion
 This first challenge required us to capture user input for subsequent two values. The first was the value entered represented a temperature value and the second represented the unit of temperature it was to be converted to. 
