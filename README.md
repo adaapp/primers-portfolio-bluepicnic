@@ -163,7 +163,7 @@ The challenges and issues I faced while developing this primer were all concerni
 
 Thankfully, after doing some research, I found the utilities of “setw” from the iomanip library and “left” from the iostream library especially useful for this purpose. However, I found that these member functions still required a significant learning curve in order to utilise them correctly. Once I’d overcome this hurdle, I refactored my code and placed any output operations into their own function, which I called from the main program. This was done to improve the readability of my code. 
 
-I also continued to use the getline function’s overload with stringstream and delimiter parameters to separate values and store them in the salaryIndicies objects and subsequent vectors designated to store that defined type. 
+I also continued to use the getline function’s overload (a varient of the same function, with differing parameters and functionality) with stringstream and delimiter parameters to separate values and store them in the salaryIndicies objects and subsequent vectors designated to store that defined type. 
 
 The additional piece of functionality I added for this primer was the creation of a function that writes the formatted data to an output file, salaryList.txt. This contains the same output that is seen in the console. This needed to be formatted in the same way as the output string, and was also placed in its own function. Because these are two separate output streams (cout and the output file) and the data is identically formatted, much of the code is required to be similar for both of these functions.
 
@@ -324,10 +324,17 @@ The event driven paradigm is especially suitable for programs that feature graph
 A weakness of the event driven paradigm is that programs using the paradigm can be hard to debug, especially if subsequent functions are called from singular events. Event driven programs with intensive and extensive graphical user interfaces may also be quite intensive on memory and have significant memory overhead compared with that of structured programs. This potentially intensive memory usage is not dissimilar to that of functional programs, although the reasons for the high memory usages differ.
 
 
-
 ---
 ## Section 3 - Continued Professional Development
 ### Benefits of becoming a Polyglot Programmer
-Vestibulum vitae semper sem. Duis leo leo, suscipit at felis non, pellentesque varius massa. Sed sit amet orci nibh. Morbi scelerisque faucibus elit, vitae mollis turpis finibus eget. In convallis euismod nunc non imperdiet. Duis ultricies pulvinar lorem, sed molestie nunc porta at. Aenean arcu ante, efficitur nec felis sed, feugiat iaculis turpis. Vestibulum eu elementum diam. Quisque nec tortor auctor, scelerisque ante vitae, fringilla tellus.
+In terms of professional development, being a Polyglot programmer can make an individual a more appealing prospect due to their experience in multiple programming languages. This can lead to increased employability and prospective job opportunities. 
 
-Quisque ligula lectus, efficitur quis malesuada sit amet, malesuada sed nibh. In lorem erat, elementum quis tempus nec, rhoncus ac ante. Mauris suscipit massa tempor, pulvinar neque vel, gravida nulla. Donec massa diam, molestie in diam nec, vulputate faucibus ligula. Aliquam erat volutpat. Aliquam sit amet dui ligula. Nullam euismod eros ultrices magna convallis lobortis. Proin convallis placerat tincidunt. Quisque interdum, nisi id egestas luctus, augue libero lacinia urna, sit amet tempus nisl sem nec quam. Vestibulum interdum urna mauris, vel dignissim nisi dignissim egestas. Donec volutpat dictum dui, at egestas sem tristique nec.
+Being a Polyglot Programmer also can act beyond their usual boundaries in a business or personal context to solve a specific problem in a more efficient and suitable way if they know multiple programming languages. This also affects the variety of problems in which a developer can solve, and allows the developer to choose how to solve a problem using tools and languages.  
+
+With rapidly changing standards between languages, frameworks, technologies and tools, a Polyglot programmer is highly adaptable and is unlikely to get left behind in an industry where tools can become obsolete and opportunities can dry up. 
+
+By adopting languages that differ in paradigm, a Polyglot programmer could also improve upon adopting that paradigm in one of their more commonly used languages. Where the skills learned from these paradigms intersect across languages, presents an opportunity for a Polyglot programmer to apply different styles to their work. This may not always be beneficial and is dependent on the language, but could help to optimise work when these skills are combined. For example: a C++ programmer could also be proficient in Wolfram and apply the control flow found in a functional language and the concepts of recursion to a C++ project. 
+
+Becoming a Polyglot programmer can also help to remove biases towards a particular language or paradigm. This not only makes an individual more versatile, but allows them to think outside the box beyond the “right” way of doing things (often the language or paradigm they are most familiar with). This also decouples the focus on syntax for a language or similar languages and allows the developer to improve their problem solving by becoming better and abstract concept and semantics. 
+
+Widening one’s horizons with the prospect of learning new programming languages also presents the opportunity (if not already discovered) to learn new programming paradigms in their entirety. Many programming languages adopt multi paradigm functionality, which can make emulating the style of a particular paradigm vary in difficulty depending on the language. Learning programming languages that lean heavily towards a particular paradigm can be a good step in becoming more proficient in that paradigm.
