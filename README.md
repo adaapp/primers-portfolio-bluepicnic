@@ -231,12 +231,59 @@ Instead, since the execution of the detached threads were essentially asynchrono
 
 
 ..  
-..  
 
 ---
 ## Section 2 - Programming Paradigms
 ### Programming Paradigms
-Simply put, a programming paradigm, for example, procedural, object-oriented, functional, structured, declarative, imperative and event driven can be described as a specific approach used when trying to solve a problem.  Although many programming languages can (and do) support multiple paradigms this discussion will focus more specifically on the possible benefits with examples of the potential differences and similarities of five from the above list. These are ...
+
+Programming paradigms are non-language specific problem solving techniques and styles that utilise different approaches and ways of thinking. Examples of programming paradigms include object-oriented, event driven, structured, functional, procedural, declarative and imperative paradigms. Certain programming languages lend themselves more strongly to some of these paradigms than others, and some are even actively designed and intrinsically linked to these paradigms. In this discussion, I will explore five of the above programming paradigms, their strengths and weaknesses, and what is shared between them. 
+ 
+#### Object-Oriented programming
+Object-Oriented programming as a paradigm is centred on the concept of objects, which are user defined. Object oriented programming languages include: C#, Python, PHP, C++, and Java, although these languages are not are not exclusive to this paradigm. Objects tend to be self-contained with their own variables and methods, storing data and code respectively. Access to these objects, (and their attributes and methods) from different parts of a program can be actively controlled by utilising access modifiers in programming languages that support object-orientation. 
+
+Object-oriented programming incorporates the concepts of reusability and modularity by allowing objects to be built using other objects. Objects can also be modified, either through their variables or methods, to support and process other objects, which can be used to build new features and functionality.
+
+Object oriented programming lends itself well to parallel development and pair programming, as its modularity allows for parts of the same or different objects to be developed independently from one another. This means that multiple people can work on different parts of a particular implementation without impeding one another, thus increasing productivity and reducing overall development time. Object oriented programs can also be modelled accurately using notation such as UML, which can help to visualise a given system. This is because objects can be broken down into their component parts, such as variables, functions and their access modifiers and types using domain modelling notations. 
+
+There are some drawbacks to following this paradigm, however. Because the size of an object can vary wildly depending on how it is implemented and the types of attributes it utilises, some objects can become particularly inefficient memory wise. This could impact the performance of a program in the cases where objects are particularly large. Compared with programs created using the procedural paradigm, for example, object oriented programs are also less efficient, can take longer to compile and to execute due to the potentially large amount of instructions and states that are built into an object.
+
+#### Functional programming
+Functional programming is derived from mathematical operations and evolved from systems of computation that focuses only on functions, such as lambda calculus, which features clear parameters and results. Functional programming achieves architectural simplicity by encouraging and utilising pure functions, which subsequently also improves the readability of functional code. Recursion is a prominent feature, which is used to mimic iterative control flow structures, such as looping. Recursive functions will call themselves until a certain case is met. 
+
+Functional programming also deals with the concept of immutability, as variables within functional programs will often not be changed outside of functions. In addition, new variables are created within functions to act as data to be returned as the result of an operation. This is designed to reinforce the idea of immutability, and eliminate unintended side effects. Functional programming languages include Wolfram, Racket and Erlang, although much like other paradigms many programming languages have received revisions to support more functional development approaches.
+
+A clear benefit of functional programming is its logical approach that clearly defines what goes in and out of a given function. This makes functional programs more easily debug-able than that of imperative programs, which will also aim to avoid any side effects. Similar to Object-Oriented programming, functional programming also lends itself well to parallel programming, as parts of a program can be abstracted as needed.
+
+A negative aspect of this paradigm is its ability to handle and manage input and output. I/O is inherently not functional, can only be developed using impure methods (although this depends on the programming language) and can lead to side effects. This is due to the fact that many I/O systems do not return values. The use of recursion as a control flow structure to support a key feature such as looping also has its downsides, as it is memory intensive, which can cause issues when memory is limited or at a premium. The concept itself is also quite complex, which does not make functional programming an entry-level paradigm.
+
+#### Structured programming
+Structured programming is a multi-language, non-platform specific paradigm which uses modular approaches to break down programs into reusable procedures, subprograms and subroutines. Structured programs also utilise templates to reuse solutions and methods across a variety of platforms. Examples of structured programming languages include Pascal and Ada, but many aspects of structured programming have been adopted by procedural programming languages. Some languages even omit certain features that can change the flow or order of execution in the program, such as GOTO, found in assembler languages, to make non-structured programming more difficult. Structured programs make extensive use of implicit control flow structures such as loops, conditions and switch/cases to maximise comprehension of a program and dictate program flow. 
+
+Features such as return and break, found in C++ are seen as deviations from this paradigm, as they introduce early exit points from a given program.
+
+An advantage of structured programming is that it is easy to read, maintain and debug, similar to that of functional programs, or programs that lend themselves to the functional paradigm. This is because statements resemble regular words and phrases (if, while, when etc). Another advantage of structured programming is that approaches can be considered problem-based rather than machine-based. This means that more time is spent solving problems and creating solutions rather than dealing with machine specific issues, which in turn means that structured programs can take less time to develop. However, this is not necessarily guaranteed. This is because some implementations may still be language or machine specific based if types and data structures differ, which could potentially increase the development time rather than reducing it, due to the number of solutions and cases that need to be programmed around.
+
+Another disadvantage of structured programs is that, where they utilise templates and generic code, time needs to be taken to convert these solutions into relevant machine code, which can be a complex and time consuming process, where this is not handled explicitly by a language or platform.
+
+#### Declarative Programming
+Declarative programming can be described as implicit, as many declarative languages, such as SQL for example, describe what to do rather than focus on how to do it. Instead, the “how” of a given solution is abstracted away in favour of a flow control that is not directly expressed. Instead, statements are interpreted and designed to simply retrieve requested pieces of information. Declarative programming languages are often high-level, that is, simple notation resembling natural language and following mathematical notation and logic, that does not deal with specific machine or platform issues. 
+
+Declarative programs also tend to lack side effects as we specifically instruct the program to do what we want it to do or query. A lack of variables in declarative programming languages also helps to reduce side effects as operations are completed and data is returned without having to track states across a program.
+
+Advantages of include its readability, similar to that of functional and structured programming. Code is inherently more understandable due to the notation resembling natural language. Declarative programs are also considerably easier to maintain, reuse and scale due to their high-level nature that does not require deep implementations to be developed.
+
+However, declarative programs are considered less customizable than that of a structured or functional program, since declarative programming languages often have complete syntax, which is a specifically designed order and arrangement or words and phrases to follow. In some cases, due to this complete syntax, certain problems require long-winded or extensive solutions to achieve functionality found in other languages. This is best observed in SQL.
+
+####Event Driven Programming
+Event Driven programming as a paradigm is designed with a specific style of program execution and flow control in mind. Instead of describing or structuring a program in way that executes code step by step, such as in programs which follow or lend themselves to the procedural paradigm, event driven programs are influenced by blocks of structured code to manage the behaviour of a given program, in response to particular events. 
+
+Event driven programs use functions known as event handlers to respond to specific, defined sets of actions in a given program. Event handlers respond to these actions asynchronously depending on input, changes in state, or as a direct result of actions from other programs and threads. Examples of event driven programming languages include VB.net, Java and an offshoot of C++ called Visual C++.
+
+The event driven paradigm is especially suitable for programs that feature graphical interfaces, as different event handlers can be assigned to different parts of an interface. Each element within a graphical interface can be used to break down a problem in a specific way, and abstract code and functionality for that specific event. Because of this, event driven systems, similar to that of object-orientated systems are also well suited to domain modelling.
+
+A weakness of the event driven paradigm is that programs using the paradigm can be hard to debug, especially if subsequent functions are called from singular events. Event driven programs with intensive and extensive graphical user interfaces may also be quite intensive on memory and have significant memory overhead compared with that of structured programs. This potentially intensive memory usage is not dissimilar to that of functional programs, although the reasons for the high memory usages differ.
+
+
 
 ---
 ## Section 3 - Continued Professional Development

@@ -4,6 +4,7 @@ class Car
 public:
   /*Definition of Car class member functions + implementation of pure functions*/
 	Car();
+  Car(string colour, string make, string engineStatus, bool locked);
 	~Car();
 	void set_colour(string colourToSet); 
 	string get_colour(void) { return mColour; } 
@@ -56,6 +57,14 @@ Car::Car()
 	mLocked = false;
 }
 
+Car::Car(string colour, string make, string engineStatus, bool locked)
+{
+  mColour = colour;
+	mMake = make;
+	mEngine = engineStatus;
+	mLocked = locked;
+}
+
 Car::~Car()
 {
 }
@@ -88,9 +97,9 @@ void Car::set_make(string makeToSet)
 
 void Car::engine_on(void)
 {
-	if (mEngine == "off")
+	if (mEngine == "off" || mEngine == "Off")
 	{
-		mEngine = "on";
+		mEngine = "On";
 		cout << "Turning the engine " << mEngine << endl;
 	}
 	else 
@@ -101,9 +110,9 @@ void Car::engine_on(void)
 
 void Car::engine_off(void)
 {
-	if (mEngine == "on")
+	if (mEngine == "on" || mEngine == "On")
 	{
-		mEngine = "off";
+		mEngine = "Off";
 		cout << "Turning the engine " << mEngine << endl;
 	}
 	else
@@ -158,9 +167,7 @@ void carClass(void)
 	int menuSelection = -1;
 	string line;
 
-	Car sportsCar;
-	sportsCar.set_make("Ford");
-	sportsCar.set_colour("Blue");
+	Car sportsCar("Blue", "Ford", "off", false);
 
 	while (menuSelection != 0)
 	{
