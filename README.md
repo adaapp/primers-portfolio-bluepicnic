@@ -229,8 +229,48 @@ This happens due to the fact that the console output won’t always reflect the 
 
 Instead, since the execution of the detached threads were essentially asynchronous (aside from the use of the sleep_now function) by executing without reliance on or waiting for one another, there was in fact no reliable way to model or anticipate an expected output. Once I had overcome this obstacle, I refactored my code to give it an extra level of readability.
 
+### Primer 9 – Car Class
+Primer 9 required us to pivot our development towards object oriented paradigms, using classes to represent the various functionalities found on a car. 
 
-..  
+When constructing the class, we were required to do so in a specific way. This included a number of private member variables, only accessible with getters and setters. Other member variables were also only accessible through specific member functions which changed their values, and by extension, their states. 
+
+The latter of the aforementioned member functions also included output strings that react to the states of the member variables. Should a user attempt to call one of these functions, but no change to state would happen as a result, then an error message is displayed. This is to emulate the states that a real car would have (such as attempting to lock an already locked vehicle)
+
+Finally, the class’s constructor was designed to accept values upon object creation to initialise the class member variables.
+
+**Reflection (as well as issues, challenges & resolutions)**
+This specific primer underwent a number of revisions while I was developing the program. I initially misunderstood the requirement to include support for initialising member variables through the constructor, opting to use a default constructor that took no parameters, and setting relevant variables to defaults therein, but also using member setter functions where applicable. I later refactored this to allow the constructor to initialise values based on parameters passed when creating a car object.
+
+Extensive refactoring was often my downfall, however. A challenge I encountered was input carrying over from selection to selection if a valid choice (i.e. 1-6) was followed by a blank input. This was because I changed an input validation check in my code, which caused a stringstream variable to not reset with each iteration of the main control flow while loop. 
+
+Adding additional functionality also presented similar problems, since I was applying the same incorrect logic for input validation to my two additional menu options, which require user input.
+
+The additional functionality made use of the setter functions as part of the car class to capture user input and set the Car colour and make member variables respectively. Once refactored and working correctly, my input validation also included an error message if the user supplied string was blank.
+
+I opted to implement this functionality in particular since it made the most sense with the existing menu functionality and use of Car class member functions. This maintained consistency and readability in my code by using the existing switch case for the menu, and the implementation itself within the main program is quite simple.
+
+I took the executive decision as part of the development of this primer to make the mEngine member variable a string rather than a Boolean to accurately reflect the state of variable itself. This also in turn conserves system resources and reduces repitition since we do not need to declare any extra variables in the Car::engine_on and Car::engine_off functions to output the state of the engine based on a Boolean condition.
+
+### Primer 10 – AreaOf Class
+The 10th and final primer built on our understanding of classes to utilise a single class “AreaOf” to calculate the areas of specific shapes (Circles, Rectangles and Trapezoids) using pure, overloaded functions.
+
+I broke down the problem in the following way:
+*Create Car Class
+*Create Area function for Circle
+*Create Area function overload for Rectangle
+*Create Area function overload for Trapezoid
+*Create display function (does not have to be pure)
+*Calculate and display area
+
+**Reflection (as well as issues, challenges & resolutions)**
+
+Initially, I had difficulty visualising the structure of the AreaOf class. I was aware that I needed three overloaded size functions to calculate the area, but was unsure if each of the parameters needed to calculate the area of each shape also needed to be member variables of the AreaOf class. In the end, in the interest of conserving system resources, I opted to declare the variables needed to calculate the area in the main function of the program, and pass them as parameters to both calculate the area and to display as part of the output strings. If they were member variables instead, then with each instance of the AreaOf class created there would be 6 different variables created every time, for a total of 18 across the three instances, with 12 of them going unused. 
+
+My AreaOf class went through many revisions. Initially, I did not have mArea as a member variable, and instead returned the values from the size functions. The calls to these functions were a part of the output, so the returned values would appear as part of the output strings. I amended this in the interests of readability. Now, the mArea member variable is retrieved using an output member function, which does not break encapsulation, while also making the code more readable. 
+
+The output function itself also has three overloads, as the output strings for each shape were different, as they contained the relevant parameters needed to calculate the area for each shape. This was initially part of the main function, but was refactored to reduce the size of the primer’s main function, thus improving readability. These output functions were not required to be pure functions.
+
+
 
 ---
 ## Section 2 - Programming Paradigms
@@ -274,7 +314,7 @@ Advantages of include its readability, similar to that of functional and structu
 
 However, declarative programs are considered less customizable than that of a structured or functional program, since declarative programming languages often have complete syntax, which is a specifically designed order and arrangement or words and phrases to follow. In some cases, due to this complete syntax, certain problems require long-winded or extensive solutions to achieve functionality found in other languages. This is best observed in SQL.
 
-####Event Driven Programming
+#### Event Driven Programming
 Event Driven programming as a paradigm is designed with a specific style of program execution and flow control in mind. Instead of describing or structuring a program in way that executes code step by step, such as in programs which follow or lend themselves to the procedural paradigm, event driven programs are influenced by blocks of structured code to manage the behaviour of a given program, in response to particular events. 
 
 Event driven programs use functions known as event handlers to respond to specific, defined sets of actions in a given program. Event handlers respond to these actions asynchronously depending on input, changes in state, or as a direct result of actions from other programs and threads. Examples of event driven programming languages include VB.net, Java and an offshoot of C++ called Visual C++.

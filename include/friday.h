@@ -27,6 +27,7 @@ private:
 class AreaOf
 {
   public:
+  AreaOf();
   void size(float radius) { mArea = PI * (radius * radius); } //Area of a circle
   void size(float width, float length) { mArea = width * length; } //area of a rectangle
   void size(float base, float height, float baseTop) { mArea = ((base + baseTop) / BASES) * height;} //area of a trapezoid
@@ -145,6 +146,11 @@ void Car::status(void)
 /*---------------------END OF CAR CLASS FUNCTION IMPLEMENATIONS----------------------*/
 
 /*AreaOf Class output function implementations*/
+
+AreaOf::AreaOf()
+{
+  mArea = 0.0;
+}
 void AreaOf::displaySize(float radius) //circle
 {
   cout << "Area of Circle (r = " << radius << "): " <<  mArea << endl;
